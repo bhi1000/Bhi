@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بطاقة بينجو تفاعلية</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        .grid { display: grid; grid-template-columns: repeat(9, 50px); gap: 5px; justify-content: center; margin-top: 20px; }
+        .cell { width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; border: 2px solid black; font-size: 20px; cursor: pointer; }
+        .marked { background-color: green; color: white; }
+        button { margin-top: 20px; padding: 10px; font-size: 16px; }
+    </style>
+</head>
+<body>
+
+    <h1>بطاقة بينجو</h1>
+    <div class="grid" id="bingoCard"></div>
+    <button onclick="resetCard()">إعادة تعيين</button>
+
+    <script>
+        const numbers = [
+            [11, 32, 44, 65, 73],
+            [8, 25, 38, 56, 80],
+            [17, 29, 47, 67, 88]
+        ];
+
+        const grid = document.getElementById("bingoCard");
+
+        function createCard() {
+            grid.innerHTML = "";
+            numbers.forEach(row => {
+                row.forEach(num => {
+                    let cell = document.createElement("div");
+                    cell.className = "cell";
+                    cell.textContent = num;
+                    cell.onclick = () => cell.classList.toggle("marked");
+                    grid.appendChild(cell);
+                });
+            });
+        }
+
+        function resetCard() {
+            document.querySelectorAll(".cell").forEach(cell => cell.classList.remove("marked"));
+        }
+
+        createCard();
+    </script>
+
+</body>
+</html>
